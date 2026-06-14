@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bachata Community — Night Parties in Tbilisi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #08080C;
+      --deep: #111118;
+      --card: #16161F;
+      --burgundy: #8B1A2F;
+      --burgundy-light: #A52038;
+      --gold: #C49A3C;
+      --gold-light: #D4AA52;
+      --cream: #F2EDE6;
+      --muted: #7A7A8A;
+      --border: rgba(194, 154, 60, 0.18);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4rem;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(8, 8, 12, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 1rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .nav-reserve {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 0.6rem 1.4rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-reserve:hover {
+      background: var(--gold-light);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(139, 26, 47, 0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 30% 40%, rgba(196, 154, 60, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, var(--black) 0%, #0d0d14 50%, var(--black) 100%);
+    }
+
+    /* Ambient floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(139, 26, 47, 0.15);
+      top: 20%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(196, 154, 60, 0.1);
+      top: 40%;
+      right: 15%;
+      animation-delay: -3s;
+    }
+
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: rgba(139, 26, 47, 0.1);
+      bottom: 20%;
+      left: 40%;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-30px) scale(1.05);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 2rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 8.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .title-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .title-inner {
+      display: block;
+      transform: translateY(110%);
+      animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .title-inner:nth-child(1) {
+      animation-delay: 0.5s;
+    }
+
+    .title-inner:nth-child(2) {
+      animation-delay: 0.7s;
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .hero-sub {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.1s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.3s forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 1px solid rgba(242, 237, 230, 0.3);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.8s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scaleY(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scaleY(1.1);
+      }
+    }
+
+    /* DIVIDER */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 4rem;
+      margin: 0;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider-icon {
+      color: var(--gold);
+      font-size: 1rem;
+      opacity: 0.6;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 7rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-full {
+      max-width: none;
+      padding: 7rem 0;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--cream);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 80%, rgba(139, 26, 47, 0.3), transparent 60%);
+    }
+
+    .img-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-accent {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      width: 60%;
+      aspect-ratio: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .accent-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .accent-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .about-text p {
+      color: rgba(242, 237, 230, 0.7);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 3rem;
+      border: 1px solid var(--border);
+    }
+
+    .stat-item {
+      background: var(--black);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* EVENTS / NIGHTS */
+    .nights-bg {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nights-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 7rem 4rem;
+    }
+
+    .nights-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .nights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .night-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .night-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .night-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--burgundy);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .night-card:hover::before {
+      opacity: 1;
+    }
+
+    .night-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .night-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .night-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .night-day {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(242, 237, 230, 0.4);
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .night-num {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(196, 154, 60, 0.06);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* MENU TEASER */
+    .menu-section {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .menu-list {
+      list-style: none;
+    }
+
+    .menu-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(194, 154, 60, 0.1);
+      gap: 1rem;
+    }
+
+    .menu-item-name {
+      font-size: 0.9rem;
+      color: var(--cream);
+      font-weight: 300;
+    }
+
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .menu-item-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    .menu-visual {
+      position: relative;
+    }
+
+    .menu-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(196, 154, 60, 0.12), transparent 60%);
+    }
+
+    .menu-quote {
+      position: relative;
+      z-index: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    /* EXPERIENCE MARQUEE */
+    .marquee-section {
+      overflow: hidden;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--deep);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(242, 237, 230, 0.25);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .marquee-item span.dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.5;
+      margin: 0;
+      font-size: 0;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* AMBIANCE / GALLERY */
+    .gallery-section {
+      padding: 7rem 4rem;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+    }
+
+    .gal-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gal-item::before {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(242, 237, 230, 0.4);
+      z-index: 2;
+    }
+
+    .gal-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(139, 26, 47, 0.3), transparent 60%);
+    }
+
+    .gal-1 {
+      grid-column: 1 / 6;
+      grid-row: 1;
+      min-height: 300px;
+    }
+
+    .gal-2 {
+      grid-column: 6 / 9;
+      grid-row: 1;
+      min-height: 300px;
+    }
+
+    .gal-3 {
+      grid-column: 9 / 13;
+      grid-row: 1;
+      min-height: 300px;
+    }
+
+    .gal-4 {
+      grid-column: 1 / 4;
+      grid-row: 2;
+      min-height: 220px;
+    }
+
+    .gal-5 {
+      grid-column: 4 / 8;
+      grid-row: 2;
+      min-height: 220px;
+    }
+
+    .gal-6 {
+      grid-column: 8 / 13;
+      grid-row: 2;
+      min-height: 220px;
+    }
+
+    .gal-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(196, 154, 60, 0.12);
+    }
+
+    /* INFO BAND */
+    .info-band {
+      background: var(--burgundy);
+      padding: 0;
+    }
+
+    .info-band-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .info-item {
+      padding: 3rem 2rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .info-item:last-child {
+      border-right: none;
+    }
+
+    .info-item-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(242, 237, 230, 0.6);
+    }
+
+    .info-item-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .info-item-sub {
+      font-size: 0.75rem;
+      color: rgba(242, 237, 230, 0.5);
+    }
+
+    /* REVIEWS */
+    .reviews-bg {
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+    }
+
+    .reviews-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 7rem 4rem;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .star {
+      color: var(--gold);
+      font-size: 0.75rem;
+    }
+
+    .review-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(242, 237, 230, 0.8);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .review-author {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* RESERVATION */
+    .reservation-section {
+      text-align: center;
+      padding: 8rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reservation-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(139, 26, 47, 0.2), transparent);
+      pointer-events: none;
+    }
+
+    .reservation-section .section-label {
+      justify-content: center;
+    }
+
+    .reservation-section .section-label::before {
+      display: none;
+    }
+
+    .res-contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 700px;
+      margin: 3rem auto 0;
+    }
+
+    .res-contact-item {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+
+    .res-contact-item:hover {
+      border-color: var(--gold);
+    }
+
+    .res-contact-item a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .res-icon {
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .res-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .res-value {
+      font-size: 0.85rem;
+      color: var(--cream);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* REVEAL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav {
+        padding: 1.2rem 1.5rem;
+      }
+
+      nav.scrolled {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .nights-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-section {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .gallery-grid {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .gal-item {
+        min-height: 180px;
+      }
+
+      .info-band-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .res-contact-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nights-inner {
+        padding: 4rem 1.5rem;
+      }
+
+      .reviews-inner {
+        padding: 4rem 1.5rem;
+      }
+
+      .gallery-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .reservation-section {
+        padding: 4rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Bachata Community</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#nights">Nights</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:+995555511855" class="nav-reserve">Reserve a Table</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Tbilisi · Since 2018 · Zurab Zhvania Lane</p>
+      <h1 class="hero-title">
+        <span class="title-line">
+          <span class="title-inner">Bachata</span>
+        </span>
+        <span class="title-line">
+          <span class="title-inner"><em>Community</em></span>
+        </span>
+      </h1>
+      <p class="hero-sub">Where the night finds its rhythm</p>
+      <div class="hero-ctas">
+        <a href="#nights" class="btn-primary">Explore Our Nights</a>
+        <a href="#menu" class="btn-ghost">View Menu</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-item">DJ Sets <span class="dot">·</span> Live Bands <span class="dot">·</span> Latin Nights
+        <span class="dot">·</span> Salsa <span class="dot">·</span> Bachata <span class="dot">·</span> Cocktails <span
+          class="dot">·</span> Fine Dining <span class="dot">·</span> Private Events <span class="dot">·</span> DJ Sets
+        <span class="dot">·</span> Live Bands <span class="dot">·</span> Latin Nights <span class="dot">·</span> Salsa
+        <span class="dot">·</span> Bachata <span class="dot">·</span> Cocktails <span class="dot">·</span> Fine Dining
+        <span class="dot">·</span> Private Events</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img-placeholder">
+          <span class="img-label">The Venue</span>
+          <!-- Replace with: <img src="venue.jpg" alt="Bachata Community interior"> -->
+        </div>
+        <div class="about-accent">
+          <span class="accent-number">4.1</span>
+          <span class="accent-label">Google Rating<br>289 Reviews</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">More than a bar —<br><em>a living stage</em></h2>
+        <p>Bachata Community was born from a simple belief: that the best nights are the ones where music does the
+          talking. Nestled in the heart of Tbilisi, we've built a space that transforms every evening into something
+          unforgettable.</p>
+        <p>From intimate DJ sessions to full live band performances, our carefully curated programme honours the Latin
+          tradition while embracing Tbilisi's own electric energy. The room breathes with every beat.</p>
+        <p>We are a bar, a restaurant, and a stage — all in one. Come for dinner, stay for the dance.</p>
+
+        <div class="about-stats">
+          <div class="stat-item reveal reveal-delay-1">
+            <span class="stat-number">100+</span>
+            <span class="stat-label">GEL per person</span>
+          </div>
+          <div class="stat-item reveal reveal-delay-2">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Nights a week</span>
+          </div>
+          <div class="stat-item reveal reveal-delay-3">
+            <span class="stat-number">289</span>
+            <span class="stat-label">Happy guests</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NIGHTS -->
+  <div class="nights-bg section-full" id="nights">
+    <div class="nights-inner">
+      <div class="nights-header">
+        <div>
+          <p class="section-label">Programme</p>
+          <h2 class="section-title">Choose your <em>night</em></h2>
+        </div>
+        <a href="#contact" class="btn-ghost">View Full Calendar →</a>
+      </div>
+      <div class="nights-grid">
+        <div class="night-card reveal">
+          <span class="night-num">01</span>
+          <span class="night-tag">Thursday</span>
+          <h3 class="night-title">Latin Rhythms</h3>
+          <p class="night-desc">An evening devoted to bachata, salsa, and kizomba. Our resident DJ curates a journey
+            through the full spectrum of Latin music — from romantic bachata sensual to high-energy salsa dura.</p>
+          <span class="night-day">Doors open 8:00 PM</span>
+        </div>
+        <div class="night-card reveal reveal-delay-1">
+          <span class="night-num">02</span>
+          <span class="night-tag">Friday</span>
+          <h3 class="night-title">Live Band Night</h3>
+          <p class="night-desc">The stage comes alive with live musicians. Local and visiting bands bring soul, jazz,
+            and Latin fusion to a room that was made for it. Dinner reservations recommended.</p>
+          <span class="night-day">Doors open 8:00 PM · Band from 10:00 PM</span>
+        </div>
+        <div class="night-card reveal reveal-delay-2">
+          <span class="night-num">03</span>
+          <span class="night-tag">Saturday</span>
+          <h3 class="night-title">Grand Night</h3>
+          <p class="night-desc">Our flagship Saturday experience. DJ sets, live performances, and the best crowd in
+            Tbilisi. This is the night people travel across the city for. Arrive early — it fills fast.</p>
+          <span class="night-day">Doors open 8:00 PM · Programme until 4:00 AM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO BAND -->
+  <div class="info-band">
+    <div class="info-band-inner">
+      <div class="info-item reveal">
+        <span class="info-item-label">Location</span>
+        <span class="info-item-value">Zurab Zhvania Lane</span>
+        <span class="info-item-sub">Tbilisi, Georgia · 0108</span>
+      </div>
+      <div class="info-item reveal reveal-delay-1">
+        <span class="info-item-label">Hours</span>
+        <span class="info-item-value">8:00 PM — Late</span>
+        <span class="info-item-sub">Thursday through Sunday</span>
+      </div>
+      <div class="info-item reveal reveal-delay-2">
+        <span class="info-item-label">Reservations</span>
+        <span class="info-item-value">+995 555 18 55</span>
+        <span class="info-item-sub">Call or message to book</span>
+      </div>
+      <div class="info-item reveal reveal-delay-3">
+        <span class="info-item-label">Follow Us</span>
+        <span class="info-item-value">@BachataCommunity</span>
+        <span class="info-item-sub">instagram.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="menu-section">
+      <div>
+        <p class="section-label">Kitchen & Bar</p>
+        <h2 class="section-title">Food to match<br>the <em>occasion</em></h2>
+
+        <ul class="menu-list">
+          <li class="menu-category">To Start</li>
+          <li class="menu-item reveal">
+            <div>
+              <span class="menu-item-name">Chilled Oysters</span>
+              <span class="menu-item-desc">Shallot mignonette, lemon, tobasco</span>
+            </div>
+            <span class="menu-item-price">45 ₾</span>
+          </li>
+          <li class="menu-item reveal reveal-delay-1">
+            <div>
+              <span class="menu-item-name">Tuna Tartare</span>
+              <span class="menu-item-desc">Avocado, sesame, ponzu dressing</span>
+            </div>
+            <span class="menu-item-price">52 ₾</span>
+          </li>
+          <li class="menu-item reveal reveal-delay-2">
+            <div>
+              <span class="menu-item-name">Burrata</span>
+              <span class="menu-item-desc">Heirloom tomato, aged balsamic, basil oil</span>
+            </div>
+            <span class="menu-item-price">38 ₾</span>
+          </li>
+
+          <li class="menu-category">Signatures</li>
+          <li class="menu-item reveal">
+            <div>
+              <span class="menu-item-name">Wagyu Beef Tenderloin</span>
+              <span class="menu-item-desc">Truffle jus, bone marrow butter, roasted garlic</span>
+            </div>
+            <span class="menu-item-price">145 ₾</span>
+          </li>
+          <li class="menu-item reveal reveal-delay-1">
+            <div>
+              <span class="menu-item-name">Grilled Sea Bass</span>
+              <span class="menu-item-desc">Saffron beurre blanc, fennel, capers</span>
+            </div>
+            <span class="menu-item-price">95 ₾</span>
+          </li>
+
+          <li class="menu-category">Cocktails</li>
+          <li class="menu-item reveal">
+            <div>
+              <span class="menu-item-name">Latin Mule</span>
+              <span class="menu-item-desc">Rum, ginger beer, lime, mint</span>
+            </div>
+            <span class="menu-item-price">28 ₾</span>
+          </li>
+          <li class="menu-item reveal reveal-delay-1">
+            <div>
+              <span class="menu-item-name">Tbilisi Negroni</span>
+              <span class="menu-item-desc">Georgian brandy, sweet vermouth, bitter orange</span>
+            </div>
+            <span class="menu-item-price">32 ₾</span>
+          </li>
+        </ul>
+
+        <div style="margin-top: 2.5rem;">
+          <a href="https://linktr.ee" class="btn-ghost" target="_blank" rel="noopener">View Full Menu →</a>
+        </div>
+      </div>
+
+      <div class="menu-visual reveal">
+        <div class="menu-img-placeholder">
+          <p class="menu-quote">"Every dish is made to be eaten slowly, every song is made to be danced to all night."
+          </p>
+          <!-- Replace with: <img src="food.jpg" alt="Signature dish"> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-header reveal">
+      <p class="section-label" style="justify-content: center;"><span style="display:none">::before</span>The Ambiance
+      </p>
+      <h2 class="section-title">A <em>feeling</em> more than a place</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gal-item gal-1" data-label="The Stage">
+        <span class="gal-num">I</span>
+        <!-- Replace with: <img src="stage.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+      </div>
+      <div class="gal-item gal-2" data-label="The Bar">
+        <span class="gal-num">II</span>
+      </div>
+      <div class="gal-item gal-3" data-label="The Dance Floor">
+        <span class="gal-num">III</span>
+      </div>
+      <div class="gal-item gal-4" data-label="Cocktails">
+        <span class="gal-num">IV</span>
+      </div>
+      <div class="gal-item gal-5" data-label="Live Music">
+        <span class="gal-num">V</span>
+      </div>
+      <div class="gal-item gal-6" data-label="Private Dining">
+        <span class="gal-num">VI</span>
+      </div>
+    </div>
+    <p
+      style="text-align:center; margin-top:2rem; font-size:0.7rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase;">
+      → Add your venue photos to the gallery placeholders
+    </p>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="reviews-bg" id="reviews">
+    <div class="reviews-inner">
+      <p class="section-label">Guest Reviews</p>
+      <h2 class="section-title">4.1 ★ · What people <em>say</em></h2>
+      <div class="reviews-grid">
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The live band on Friday was extraordinary. The room has this incredible energy — you
+            walk in and you immediately feel it. We'll be back every weekend."</p>
+          <span class="review-author">— Google Review, May 2026</span>
+        </div>
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">"Genuinely the best bachata night in Tbilisi. Great DJ, welcoming crowd, and the
+            cocktails are something else. The Tbilisi Negroni is a must."</p>
+          <span class="review-author">— Google Review, April 2026</span>
+        </div>
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"We had our company dinner here and it was perfect. The food was excellent and then the
+            music started and nobody wanted to leave. Magical atmosphere."</p>
+          <span class="review-author">— Google Review, March 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESERVATION / CONTACT -->
+  <section class="reservation-section" id="contact">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title" style="margin-bottom:1rem;">Reserve your <em>evening</em></h2>
+    <p style="color:var(--muted); max-width:480px; margin:0 auto 2rem; font-size:0.9rem;">
+      Tables book quickly on weekends. We recommend reserving at least 48 hours in advance. Walk-ins welcome based on
+      availability.
+    </p>
+    <a href="tel:+995555511855" class="btn-primary" style="display:inline-block; margin-bottom: 3rem;">Call to Reserve:
+      555 18 55</a>
+
+    <div class="res-contact-grid">
+      <div class="res-contact-item">
+        <a href="tel:+995555511855">
+          <span class="res-icon">📞</span>
+          <span class="res-label">Phone</span>
+          <span class="res-value">555 51 18 55</span>
+        </a>
+      </div>
+      <div class="res-contact-item">
+        <a href="https://instagram.com" target="_blank" rel="noopener">
+          <span class="res-icon">📸</span>
+          <span class="res-label">Instagram</span>
+          <span class="res-value">@BachataCommunity</span>
+        </a>
+      </div>
+      <div class="res-contact-item">
+        <a href="https://maps.google.com/?q=Bachata+Community+Tbilisi" target="_blank" rel="noopener">
+          <span class="res-icon">📍</span>
+          <span class="res-label">Find Us</span>
+          <span class="res-value">Zurab Zhvania Lane</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Bachata Community</div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#nights">Nights</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Bachata Community · Tbilisi, Georgia</p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
